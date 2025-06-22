@@ -55,6 +55,14 @@ Les rapports à produire :
 
 ### A03 - ???
 
+3) pour chacun des produits existants, le nombre moyen vendu quotidiennement
+4) pour chacun des clients, les ventes réalisées
+5) pour chacun des clients, le chiffre d'affaires total
+6) pour chacun des "jour" de la semaine mentionnés, le chiffre d'affaires total et nbre de ventes réalisés
+7) le chiffre d'affaire réalisé "type" de vente par type de vente
+8) "type" de vente par type de vente, la liste des produits correspondante
+9) "type" de vente par type de vente, produit par produit, le nbre de produits vendus
+
 À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
 
 ```json
