@@ -1,6 +1,6 @@
 <h1><code>Module 323</code> - Programmer de manière fonctionnelle</h1>
 
-# 😅 Formative F02 - Entraînement à la programmation fonctionnelle / Solution
+# Formative F02 - Entraînement à la programmation fonctionnelle / Solution
 
 ## Objectifs
 
