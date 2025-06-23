@@ -211,81 +211,259 @@ Les rapports à produire :
       "prenom": "Guy",
       "ca": 756
    }
-]```
+]
+```
 
+#### A05 - CA et nbre de ventes par jour de la semaine
 
-1) pour chacun des produits existants, le nombre moyen vendu quotidiennement
-2) pour chacun des clients, les ventes réalisées
-3) pour chacun des clients, le chiffre d'affaires total
-4) pour chacun des "jour" de la semaine mentionnés, le chiffre d'affaires total et nbre de ventes réalisés
-5) le chiffre d'affaire réalisé "type" de vente par type de vente
-6) "type" de vente par type de vente, la liste des produits correspondante
-7) "type" de vente par type de vente, produit par produit, le nbre de produits vendus
+⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
 
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
+>[!TIP]
+>Pour identifier le nom du jour de la semaine à partir d'une date, utilisez la formule suivante : `new Date(unedate).getDay()`. Cette formule vous retournera un nombre de 0..6 correspondant à "lundi".."dimanche".
+
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
+
+```json
+{
+   "lundi": {
+      "ca": 2233.2,
+      "nbre_ventes": 229
+   },
+   "mardi": {
+      "ca": 2180.000000000001,
+      "nbre_ventes": 239
+   },
+   "mercredi": {
+      "ca": 1807.6000000000004,
+      "nbre_ventes": 214
+   },
+   "jeudi": {
+      "ca": 2200.0000000000005,
+      "nbre_ventes": 233
+   },
+   "vendredi": {
+      "ca": 1862.8999999999999,
+      "nbre_ventes": 212
+   }
+}
+```
+
+#### A06 - CA par type de produit
+
+⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
+
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
+
+```json
+{
+   "Fruits": 281.5,
+   "Boisson énergisante": 490,
+   "Salades": 653.0000000000003,
+   "Boisson froide": 1582.6999999999975,
+   "Boisson chaude": 1285,
+   "Plats chauds": 2572.5,
+   "Produits laitiers": 333.6000000000003,
+   "Sandwich": 1170.8999999999965,
+   "Viennoiserie": 415,
+   "Pâtisseries & desserts": 535.5,
+   "Biscuits": 549,
+   "Snacks": 414.9999999999993
+}
+```
+
+#### A07 - Types de produits et leur produits
+
+⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
+
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
+
+```json
+{
+   "Fruits": [
+      "Poire",
+      "Banane",
+      "Pomme"
+   ],
+   "Boisson énergisante": [
+      "Monster Energy, cannette 300ml",
+      "Red Bull, cannette 250ml"
+   ],
+   "Salades": [
+      "Salade de pâtes",
+      "Salade césar"
+   ],
+   "Boisson froide": [
+      "Eau minérale plate 3dl",
+      "Jus de pommes 3dl",
+      "Eau minérale gazeuse 3dl",
+      "Thé-froid citron maison sans sucre 4dl",
+      "Coca-cola 3dl",
+      "Thé-froid citron 3dl",
+      "Thé-froid pêche 3dl",
+      "Coca-cola zéro 3dl"
+   ],
+   "Boisson chaude": [
+      "Café",
+      "Cappuccino",
+      "Espresso",
+      "Latte macchiato",
+      "Chocolat chaud",
+      "Thé"
+   ],
+   "Plats chauds": [
+      "Plat du jour chaud avec viande",
+      "Plat du jour chaud avec pâtes ou riz",
+      "Plat du jour chaud végétarien"
+   ],
+   "Produits laitiers": [
+      "Briquette de lait UHT de 250ml",
+      "Morceau de Gruyère AOP surchoix 100g"
+   ],
+   "Sandwich": [
+      "Sandwich poulet/curry",
+      "Sandwich jambon/beurre",
+      "Sandwich jambon/fromage",
+      "Sandwich au thon"
+   ],
+   "Viennoiserie": [
+      "Croissant au beurre",
+      "Petit-pain au lait",
+      "Petit-pain au chocolat"
+   ],
+   "Pâtisseries & desserts": [
+      "Tranche de gâteau aux noix",
+      "Tranche de gâteau aux pommes"
+   ],
+   "Biscuits": [
+      "Les bricelets de grand-mère, paquet de 10",
+      "Les palets Bretons, paquet de 5"
+   ],
+   "Snacks": [
+      "Cacahouettes",
+      "Chips paprika",
+      "Sachet de fruits secs",
+      "Barre de céréales"
+   ]
+}
+```
+
+#### A08 - Nbre de vente des produits par type
+
+⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
+
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
+
+```json
+{
+   "Fruits": {
+      "Poire": 93,
+      "Banane": 79,
+      "Pomme": 70
+   },
+   "Boisson énergisante": {
+      "Monster Energy, cannette 300ml": 68,
+      "Red Bull, cannette 250ml": 72
+   },
+   "Salades": {
+      "Salade de pâtes": 74,
+      "Salade césar": 85
+   },
+   "Boisson froide": {
+      "Eau minérale plate 3dl": 91,
+      "Jus de pommes 3dl": 94,
+      "Eau minérale gazeuse 3dl": 79,
+      "Thé-froid citron maison sans sucre 4dl": 81,
+      "Coca-cola 3dl": 75,
+      "Thé-froid citron 3dl": 73,
+      "Thé-froid pêche 3dl": 69,
+      "Coca-cola zéro 3dl": 96
+   },
+   "Boisson chaude": {
+      "Café": 75,
+      "Cappuccino": 78,
+      "Espresso": 88,
+      "Latte macchiato": 89,
+      "Chocolat chaud": 81,
+      "Thé": 88
+   },
+   "Plats chauds": {
+      "Plat du jour chaud avec viande": 87,
+      "Plat du jour chaud avec pâtes ou riz": 87,
+      "Plat du jour chaud végétarien": 71
+   },
+   "Produits laitiers": {
+      "Briquette de lait UHT de 250ml": 76,
+      "Morceau de Gruyère AOP surchoix 100g": 84
+   },
+   "Sandwich": {
+      "Sandwich poulet/curry": 79,
+      "Sandwich jambon/beurre": 84,
+      "Sandwich jambon/fromage": 83,
+      "Sandwich au thon": 75
+   },
+   "Viennoiserie": {
+      "Croissant au beurre": 92,
+      "Petit-pain au lait": 82,
+      "Petit-pain au chocolat": 77
+   },
+   "Pâtisseries & desserts": {
+      "Tranche de gâteau aux noix": 82,
+      "Tranche de gâteau aux pommes": 71
+   },
+   "Biscuits": {
+      "Les bricelets de grand-mère, paquet de 10": 86,
+      "Les palets Bretons, paquet de 5": 97
+   },
+   "Snacks": {
+      "Cacahouettes": 72,
+      "Chips paprika": 88,
+      "Sachet de fruits secs": 85,
+      "Barre de céréales": 70
+   }
+}
+```
+
+#### A09 -
+
+⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
+
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
 
 ```json
 ```
 
-### A04 - ???
+#### A10 -
 
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
+⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
 
-```json
-```
-
-### A05 - ???
-
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
 
 ```json
 ```
 
-### A06 - ???
+#### A11 -
 
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
+⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
 
-```json
-```
-
-### A07 - ???
-
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
 
 ```json
 ```
 
-### A08 - ???
+#### A12 -
 
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
+⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
 
-```json
-```
-
-### A09 - ???
-
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
 
 ```json
 ```
 
-### A10 - ???
+#### A13 -
 
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
+⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
 
-```json
-```
-
-### A11 - ???
-
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
-
-```json
-```
-
-### A12 - ???
-
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
 
 ```json
 ```

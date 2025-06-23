@@ -65,7 +65,6 @@ function actionA3() {
     afficherObjet(clientsUniques);
 }
 
-
 function actionA4() {
 
     const CAParClient = jsonData.ventes.reduce((accumulateur, vente) => {
@@ -83,6 +82,63 @@ function actionA4() {
     afficherObjet(listeDesClientsEtCA);
 }
 
+function actionA5() {
+
+    const joursSemaine = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+
+    const statsParJour = jsonData.ventes.reduce((acc, v) => {
+        const jour = joursSemaine[new Date(v.date).getDay()];
+        if (!acc[jour]) acc[jour] = { ca: 0, nbre_ventes: 0 };
+        acc[jour].ca += v.produits.reduce((s, p) => s + p.prix, 0);
+        acc[jour].nbre_ventes += 1;
+        return acc;
+    }, {});
+
+    afficherObjet(statsParJour);
+}
+
+function actionA6() {
+
+    const CAParTypeDeProduit = jsonData.ventes
+        .flatMap(vente => vente.produits)
+        .reduce((accumulateur, produit) => {
+            accumulateur[produit.type] = accumulateur[produit.type] ? accumulateur[produit.type] + produit.prix : produit.prix;
+            return accumulateur;
+        }, {});
+
+    afficherObjet(CAParTypeDeProduit);
+}
+
+function actionA7() {
+
+    const produitsParTypeSet = jsonData.ventes
+        .flatMap(vente => vente.produits)
+        .reduce((acc, produit) => {
+            if (!acc[produit.type])
+                acc[produit.type] = [];
+            if (!acc[produit.type].includes(produit.nom))
+                acc[produit.type].push(produit.nom);
+            return acc;
+        }, {});
+
+    afficherObjet(produitsParTypeSet);
+
+}
+
+function actionA8() {
+
+    const nbVendusParTypeEtProduit = jsonData.ventes
+        .flatMap(vente => vente.produits)
+        .reduce((acc, produit) => {
+            if (!acc[produit.type])
+                acc[produit.type] = {};
+            acc[produit.type][produit.nom] = (acc[produit.type][produit.nom] || 0) + 1;
+            return acc;
+        }, {});
+
+    afficherObjet(nbVendusParTypeEtProduit);
+
+}
 
 // ----------------------------------------------------------
 // CONTINUER ICI !
@@ -101,48 +157,9 @@ function actionA3b() {
     console.log("Moyenne par produit par jour :", moyenneParProduit);
 
 }
-function actionA4b() {
-    const ventesParClient = jsonData.ventes.reduce((acc, v) => {
-        const id = v.client.id;
-        if (!acc[id]) acc[id] = [];
-        acc[id].push(v);
-        return acc;
-    }, {});
-    console.log("Ventes par client :", ventesParClient);
 
-}
-function actionA5() {
-    const caParClient = jsonData.ventes.reduce((acc, v) => {
-        const id = v.client.id;
-        const montant = v.produits.reduce((s, p) => s + p.prix, 0);
-        acc[id] = (acc[id] || 0) + montant;
-        return acc;
-    }, {});
-    console.log("CA par client :", caParClient);
 
-}
-function actionA6() {
-    const joursSemaine = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
-    const statsParJour = jsonData.ventes.reduce((acc, v) => {
-        const jour = joursSemaine[new Date(v.date).getDay()];
-        if (!acc[jour]) acc[jour] = { ca: 0, ventes: 0 };
-        acc[jour].ca += v.produits.reduce((s, p) => s + p.prix, 0);
-        acc[jour].ventes += 1;
-        return acc;
-    }, {});
-    console.log("Stats par jour de semaine :", statsParJour);
-
-}
-function actionA7() {
-    const caParType = jsonData.ventes.flatMap(v => v.produits)
-        .reduce((acc, p) => {
-            acc[p.type] = (acc[p.type] || 0) + p.prix;
-            return acc;
-        }, {});
-    console.log("CA par type de vente :", caParType);
-
-}
-function actionA8() {
+function actionA8b() {
     const produitsParTypeSet = jsonData.ventes.flatMap(v => v.produits)
         .reduce((acc, p) => {
             acc[p.type] = acc[p.type] || new Set();
