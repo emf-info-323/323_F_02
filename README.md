@@ -31,7 +31,11 @@ Les rapports à produire :
 - [A11 - ???](#a11---)
 - [A12 - ???](#a12---)
 
-### A01 - La plus petite et la plus grande date
+### Utilisation de `reduce()` seul
+
+#### A01 - La plus petite et la plus grande date
+
+⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
 
 À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
 
@@ -42,7 +46,9 @@ Les rapports à produire :
 }
 ```
 
-### A02 - Le chiffre d'affaire quotidien moyen
+#### A02 - Le chiffre d'affaire quotidien moyen
+
+⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
 
 À partir des données déjà chargées dans `jsonData`, vous devez obtenir la moyenne demandée:
 
@@ -53,15 +59,168 @@ Les rapports à produire :
 118.20344827586193
 ```
 
-### A03 - ???
+#### A03 - Liste des clients par id
 
-3) pour chacun des produits existants, le nombre moyen vendu quotidiennement
-4) pour chacun des clients, les ventes réalisées
-5) pour chacun des clients, le chiffre d'affaires total
-6) pour chacun des "jour" de la semaine mentionnés, le chiffre d'affaires total et nbre de ventes réalisés
-7) le chiffre d'affaire réalisé "type" de vente par type de vente
-8) "type" de vente par type de vente, la liste des produits correspondante
-9) "type" de vente par type de vente, produit par produit, le nbre de produits vendus
+⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
+
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
+
+```json
+{
+   "ID2108DF8A-37B5AB5A": {
+      "nom": "Terrieur",
+      "prenom": "Alex"
+   },
+   "ID12D7310B-3972B953": {
+      "nom": "Terrieur",
+      "prenom": "Alain"
+   },
+   "ID1C4E8094-30849278": {
+      "nom": "Ternet",
+      "prenom": "Alain"
+   },
+   "ID3A3D49B6-21F77D0C": {
+      "nom": "Friedli",
+      "prenom": "Paul"
+   },
+   "ID09F6B523-042C8280": {
+      "nom": "Nissens",
+      "prenom": "Remy"
+   },
+   "ID1529E3C7-1A2CDD50": {
+      "nom": "Fice",
+      "prenom": "Eddy"
+   },
+   "ID38D4C392-0FB4B1D9": {
+      "nom": "d'Œuf",
+      "prenom": "John"
+   },
+   "ID0BAA34BE-15694812": {
+      "nom": "Haroni",
+      "prenom": "Mac"
+   },
+   "ID289F8B35-39C65DB1": {
+      "nom": "Galley",
+      "prenom": "Philippe"
+   },
+   "ID188020B2-1C54920C": {
+      "nom": "Célère",
+      "prenom": "Jack"
+   },
+   "ID11CEAC28-34EE910C": {
+      "nom": "Voyante",
+      "prenom": "Claire"
+   },
+   "ID29AFF6B4-36813BA8": {
+      "nom": "Rique",
+      "prenom": "Théo"
+   },
+   "ID2141229C-0B0CBFB0": {
+      "nom": "Tariste",
+      "prenom": "Guy"
+   }
+}
+```
+
+#### A04 - Liste des clients et leur CA
+
+⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
+
+>[!TIP]
+>À la fin, la méthode `Object.values(unObjet)` vous permettra de transformer votre objet en un tableau ne contenant que les valeurs face aux clé ;-)
+
+À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
+
+```json
+[
+   {
+      "id": "ID2108DF8A-37B5AB5A",
+      "nom": "Terrieur",
+      "prenom": "Alex",
+      "ca": 731.9000000000001
+   },
+   {
+      "id": "ID12D7310B-3972B953",
+      "nom": "Terrieur",
+      "prenom": "Alain",
+      "ca": 756.8999999999999
+   },
+   {
+      "id": "ID1C4E8094-30849278",
+      "nom": "Ternet",
+      "prenom": "Alain",
+      "ca": 813.6999999999998
+   },
+   {
+      "id": "ID3A3D49B6-21F77D0C",
+      "nom": "Friedli",
+      "prenom": "Paul",
+      "ca": 909.2
+   },
+   {
+      "id": "ID09F6B523-042C8280",
+      "nom": "Nissens",
+      "prenom": "Remy",
+      "ca": 795.0999999999998
+   },
+   {
+      "id": "ID1529E3C7-1A2CDD50",
+      "nom": "Fice",
+      "prenom": "Eddy",
+      "ca": 834.1999999999999
+   },
+   {
+      "id": "ID38D4C392-0FB4B1D9",
+      "nom": "d'Œuf",
+      "prenom": "John",
+      "ca": 787.3999999999997
+   },
+   {
+      "id": "ID0BAA34BE-15694812",
+      "nom": "Haroni",
+      "prenom": "Mac",
+      "ca": 828.6000000000001
+   },
+   {
+      "id": "ID289F8B35-39C65DB1",
+      "nom": "Galley",
+      "prenom": "Philippe",
+      "ca": 866.7999999999998
+   },
+   {
+      "id": "ID188020B2-1C54920C",
+      "nom": "Célère",
+      "prenom": "Jack",
+      "ca": 667.1999999999996
+   },
+   {
+      "id": "ID11CEAC28-34EE910C",
+      "nom": "Voyante",
+      "prenom": "Claire",
+      "ca": 684.5
+   },
+   {
+      "id": "ID29AFF6B4-36813BA8",
+      "nom": "Rique",
+      "prenom": "Théo",
+      "ca": 852.1999999999998
+   },
+   {
+      "id": "ID2141229C-0B0CBFB0",
+      "nom": "Tariste",
+      "prenom": "Guy",
+      "ca": 756
+   }
+]```
+
+
+1) pour chacun des produits existants, le nombre moyen vendu quotidiennement
+2) pour chacun des clients, les ventes réalisées
+3) pour chacun des clients, le chiffre d'affaires total
+4) pour chacun des "jour" de la semaine mentionnés, le chiffre d'affaires total et nbre de ventes réalisés
+5) le chiffre d'affaire réalisé "type" de vente par type de vente
+6) "type" de vente par type de vente, la liste des produits correspondante
+7) "type" de vente par type de vente, produit par produit, le nbre de produits vendus
 
 À partir des données déjà chargées dans `jsonData`, vous devez obtenir ceci :
 

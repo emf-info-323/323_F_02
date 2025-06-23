@@ -50,13 +50,44 @@ function actionA2() {
 
     const caMoyenParJour = statsVentes.caTotal / Object.keys(statsVentes.dates).length;
 
-    afficherObjet(caMoyenParPeriode);
+    afficherObjet(caMoyenParJour);
 
 }
+
+function actionA3() {
+
+    const clientsUniques = jsonData.ventes.reduce((accumulateur, vente) => {
+        if (!accumulateur[vente.client.id])
+            accumulateur[vente.client.id] = { nom: vente.client.nom, prenom: vente.client.prenom };
+        return accumulateur;
+    }, {});
+
+    afficherObjet(clientsUniques);
+}
+
+
+function actionA4() {
+
+    const CAParClient = jsonData.ventes.reduce((accumulateur, vente) => {
+        if (!accumulateur[vente.client.id])
+            accumulateur[vente.client.id] = {
+                id: vente.client.id,
+                nom: vente.client.nom,
+                prenom: vente.client.prenom,
+                ca: 0.0
+            };
+        accumulateur[vente.client.id].ca += vente.produits.reduce((accumulateur, produit) => accumulateur + produit.prix, 0);
+        return accumulateur;
+    }, {});
+    const listeDesClientsEtCA = Object.values(CAParClient);
+    afficherObjet(listeDesClientsEtCA);
+}
+
+
 // ----------------------------------------------------------
 // CONTINUER ICI !
 // ----------------------------------------------------------
-function actionA3() {
+function actionA3b() {
     const nbreJours = datesUniques.length;
     const produitsVendus = {};
     jsonData.ventes.forEach(v =>
@@ -70,7 +101,7 @@ function actionA3() {
     console.log("Moyenne par produit par jour :", moyenneParProduit);
 
 }
-function actionA4() {
+function actionA4b() {
     const ventesParClient = jsonData.ventes.reduce((acc, v) => {
         const id = v.client.id;
         if (!acc[id]) acc[id] = [];
