@@ -11,7 +11,6 @@ window.addEventListener("load", (event) => {
     document.querySelector('#idActionA10').addEventListener('click', actionA10);
     document.querySelector('#idActionA11').addEventListener('click', actionA11);
     document.querySelector('#idActionA12').addEventListener('click', actionA12);
-    document.querySelector('#idActionA13').addEventListener('click', actionA13);
 });
 
 // ---------------------------------------------------------------------------
@@ -51,7 +50,6 @@ function actionA2() {
     const caMoyenParJour = statsVentes.caTotal / Object.keys(statsVentes.dates).length;
 
     afficherObjet(caMoyenParJour);
-
 }
 
 function actionA3() {
@@ -122,7 +120,6 @@ function actionA7() {
         }, {});
 
     afficherObjet(produitsParTypeSet);
-
 }
 
 function actionA8() {
@@ -137,347 +134,84 @@ function actionA8() {
         }, {});
 
     afficherObjet(nbVendusParTypeEtProduit);
-
 }
 
-// ----------------------------------------------------------
-// CONTINUER ICI !
-// ----------------------------------------------------------
-function actionA3b() {
-    const nbreJours = datesUniques.length;
-    const produitsVendus = {};
-    jsonData.ventes.forEach(v =>
-        v.produits.forEach(p => {
-            produitsVendus[p.nom] = (produitsVendus[p.nom] || 0) + 1;
-        })
-    );
-    const moyenneParProduit = Object.entries(produitsVendus).map(
-        ([nom, total]) => ({ nom, moyenne: total / nbreJours })
-    );
-    console.log("Moyenne par produit par jour :", moyenneParProduit);
-
-}
-
-
-function actionA8b() {
-    const produitsParTypeSet = jsonData.ventes.flatMap(v => v.produits)
-        .reduce((acc, p) => {
-            acc[p.type] = acc[p.type] || new Set();
-            acc[p.type].add(p.nom);
-            return acc;
-        }, {});
-    const produitsParType = Object.fromEntries(
-        Object.entries(produitsParTypeSet).map(
-            ([type, set]) => [type, Array.from(set)]
-        )
-    );
-    console.log("Produits par type :", produitsParType);
-
-}
 function actionA9() {
-    const nbVendusParTypeEtProduit = jsonData.ventes.flatMap(v => v.produits)
-        .reduce((acc, p) => {
-            acc[p.type] = acc[p.type] || {};
-            acc[p.type][p.nom] = (acc[p.type][p.nom] || 0) + 1;
-            return acc;
-        }, {});
-    console.log("Nb produits vendus par type et nom :", nbVendusParTypeEtProduit);
 
+    const toutesLesVentes = jsonData.ventes.map(vente => vente.produits).flat();
+
+    afficherObjet(toutesLesVentes);
 }
+
 function actionA10() {
-    const tousLesClients = Object.values(
-        jsonData.ventes.reduce((acc, v) => {
-            acc[v.client.id] = v.client;
-            return acc;
-        }, {})
-    );
-    const clientsTries = tousLesClients.sort((a, b) =>
-        a.nom.localeCompare(b.nom) || a.prenom.localeCompare(b.prenom)
-    );
-    console.log("Clients triés :", clientsTries);
 
+    const TOP_VALUE = 6;
+
+    const ventesParProduit = jsonData.ventes
+        .map(vente => vente.produits)
+        .flat()
+        .reduce((accumulateur, produit) => {
+            if (!accumulateur[produit.id]) {
+                accumulateur[produit.id] = {
+                    id: produit.id,
+                    nom: produit.nom,
+                    ca: produit.prix
+                };
+            }
+            else {
+                accumulateur[produit.id].ca += produit.prix;
+            }
+            return accumulateur;
+        }, {});
+
+    const topDesVentes = Object.values(ventesParProduit)
+        .sort((produitA, produitB) => produitB.ca - produitA.ca)
+        .slice(0, TOP_VALUE);
+
+
+    afficherObjet(topDesVentes);
 }
+
 function actionA11() {
-    const ventesParProduit = {};
-    jsonData.ventes.forEach(v =>
-        v.produits.forEach(p => {
-            ventesParProduit[p.nom] = (ventesParProduit[p.nom] || 0) + 1;
-        })
-    );
-    const produitsTriesParVentes = Object.entries(ventesParProduit)
-        .sort((a, b) => b[1] - a[1])
-        .map(([nom, total]) => ({ nom, total }));
-    console.log("Produits du plus vendu au moins vendu :", produitsTriesParVentes);
+
+    const clientsParIdClient = jsonData.ventes
+        .reduce((accumulateur, vente) => {
+            if (!accumulateur[vente.client.id])
+                accumulateur[vente.client.id] = {
+                    nom: vente.client.nom.toUpperCase(),
+                    prenom: vente.client.prenom.substring(0, 1).toUpperCase() + vente.client.prenom.substring(1).toLowerCase()
+                };
+            return accumulateur;
+        }, {});
+
+    const clientsTries = Object.values(clientsParIdClient)
+        .sort((clientA, clientB) => {
+            const nomCompare = clientA.nom.localeCompare(clientB.nom, 'fr');
+            if (nomCompare !== 0) return nomCompare;
+            return clientA.prenom.localeCompare(clientB.prenom, 'fr');
+        });
+
+    afficherObjet(clientsTries);
+}
+
+
+function actionA12() {
+
+    const TOP_VALUE = 5;
+
+    const CAParDate = jsonData.ventes.reduce((accumulateur, vente) => {
+        if (!accumulateur[vente.date])
+            accumulateur[vente.date] = {
+                date: vente.date,
+                ca: 0.0
+            };
+        accumulateur[vente.date].ca += vente.produits.reduce((accumulateur, produit) => accumulateur + produit.prix, 0);
+        return accumulateur;
+    }, {});
+    const listeDesMeilleursCAParDate = Object.values(CAParDate)
+        .sort((caParDateA, caParDateB) => caParDateB.ca - caParDateA.ca)
+        .slice(0, TOP_VALUE);
+
+    afficherObjet(listeDesMeilleursCAParDate);
 
 }
-function actionA12() { }
-function actionA13() { }
-function actionA14() { }
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-// function actionA2() {
-
-//     const apprentisUniquesTries = Array.from(       // Retransformer en tableau
-//         new Set(jsonData.evaluations                // Supprimer les doublons de ce tableau
-//             // Ne retenir que le (P)+(rénom)+' '+(NOM)
-//             .map(evaluation => evaluation.prenom.substring(0, 1).toUpperCase() + evaluation.prenom.substring(1).toLowerCase() + ' ' + evaluation.nom.toUpperCase())
-//         )
-//     ).sort();                                       // Trier le tableau
-
-//     afficherObjet(apprentisUniquesTries);
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionB() {
-
-//     // Objet avec les branches et nbre de notes
-//     const brancheEtNbreDeNotesObj = jsonData.evaluations
-//         .reduce((acc, evaluation) => {
-//             acc[evaluation.branche] = (acc[evaluation.branche] || 0) + 1;
-//             return acc;
-//         }, {});
-
-//     afficherObjet(brancheEtNbreDeNotesObj);
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionC() {
-
-//     const brancheEtNbreDeNotesTableau = Object.entries( // Très pratique, transforme un objet avec des clés/valeur en un tableau de tableaux avec à chaque fois clé/valeur
-//         // Objet avec les branches et nbre de notes
-//         jsonData.evaluations
-//             .reduce((acc, evaluation) => {
-//                 acc[evaluation.branche] = (acc[evaluation.branche] || 0) + 1;
-//                 return acc;
-//             }, {}))
-//         // Retransformer en un tableau d'objets branche->nbre
-//         .map(([branche, count]) => ({ branche, count }))
-//         // Trier les éléments du tableau par branche
-//         .sort((a, b) => a.branche.localeCompare(b.branche));
-
-//     afficherObjet(brancheEtNbreDeNotesTableau);
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionT1() {
-
-//     const partieConnueEdit = document.getElementById("idContenuApprenti");
-//     const partieConnue = partieConnueEdit.value.toLowerCase();
-
-//     // Retransformer en tableau
-//     const apprentisConcernesTries = Array.from(
-//         // Pas de doublons
-//         new Set(jsonData.evaluations
-//             // Filtrer les évaluations dont le nom fourni n'est pas dans le prénom ou le nom
-//             .filter(evaluation => (partieConnue.length <= 0) || evaluation.prenom.toLowerCase().includes(partieConnue) || evaluation.nom.toLowerCase().includes(partieConnue))
-//             // Ne conserver que le (P)+(rénom)+' '+(NOM)
-//             .map(evaluation => evaluation.prenom.substring(0, 1).toUpperCase() + evaluation.prenom.substring(1).toLowerCase() + ' ' + evaluation.nom.toUpperCase())
-//         ))
-//         // Trier
-//         .sort();
-
-//     afficherObjet(apprentisConcernesTries);
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionT2() {
-
-//     const nomBrancheEdit = document.getElementById("idNomBranche");
-//     const nomBranche = nomBrancheEdit.value.toLowerCase();
-
-//     const amount = jsonData.evaluations.filter(evaluation => (nomBranche.length <= 0) || (evaluation.branche.toLowerCase() === nomBranche)).length;
-
-//     afficherObjet(amount);
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionD() {
-
-//     const moyenneParBranche =
-//         // Supprime les clés, donc un tableau de {branche, total, n}
-//         Object.values(
-//             // Produit un objet avec branche->{branche, total, n}
-//             jsonData.evaluations.reduce((acc, evaluation) => {
-//                 if (!acc[evaluation.branche]) acc[evaluation.branche] = { branche: evaluation.branche, total: 0, n: 0 };
-//                 acc[evaluation.branche].total += evaluation.note;
-//                 acc[evaluation.branche].n += 1;
-//                 return acc;
-//             }, {})
-//         )
-//             // Supprime total et n et rajoute la moyenne
-//             .map(({ branche, total, n }) => ({
-//                 branche,
-//                 moyenne: +(total / n).toFixed(2)
-//             }))
-//             // Tri par nom de branche
-//             .sort((a, b) => a.branche.localeCompare(b.branche));
-
-//     afficherObjet(moyenneParBranche);
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionE() {
-
-//     const statsParBranche = Object.values(
-//         jsonData.evaluations
-//             .reduce((acc, evaluation) => {
-//                 if (!acc[evaluation.branche]) acc[evaluation.branche] = {
-//                     branche: evaluation.branche,
-//                     count: 0,
-//                     total: 0
-//                 };
-//                 acc[evaluation.branche].count += 1;
-//                 acc[evaluation.branche].total += evaluation.note;
-//                 return acc;
-//             }, {})
-//     ).map(({ branche, count, total }) => ({
-//         branche,
-//         count,
-//         moyenne: +(total / count).toFixed(2)
-//     })).sort((a, b) => a.branche.localeCompare(b.branche));
-
-//     afficherObjet(statsParBranche);
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionF() {
-
-//     const elevesBranchesNotes = Object.values(
-//         jsonData.evaluations
-//             .reduce((acc, evaluation) => {
-//                 const key = `${evaluation.prenom} ${evaluation.nom}`;
-//                 if (!acc[key]) acc[key] = { eleve: key, branches: {} };
-//                 if (!acc[key].branches[evaluation.branche]) acc[key].branches[evaluation.branche] = [];
-//                 acc[key].branches[evaluation.branche].push(evaluation.note);
-//                 return acc;
-//             }, {})
-//     ).map(eleveObj => ({
-//         eleve: eleveObj.eleve,
-//         branches: Object.entries(eleveObj.branches)
-//             .map(([branche, notes]) => ({ branche, notes }))
-//     })).sort((a, b) => a.eleve.localeCompare(b.eleve));
-
-//     afficherObjet(elevesBranchesNotes);
-
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionG() {
-
-//     const elevesBranchesStats = Object.values(
-//         jsonData.evaluations
-//             .reduce((acc, evaluation) => {
-//                 const key = `${evaluation.prenom} ${evaluation.nom}`;
-//                 if (!acc[key]) acc[key] = { eleve: key, branches: {} };
-//                 if (!acc[key].branches[evaluation.branche]) acc[key].branches[evaluation.branche] = [];
-//                 acc[key].branches[evaluation.branche].push(evaluation.note);
-//                 return acc;
-//             }, {})
-//     ).map(eleveObj => ({
-//         eleve: eleveObj.eleve,
-//         branches: Object.entries(eleveObj.branches).map(([branche, notes]) => {
-//             const min = Math.min(...notes);
-//             const max = Math.max(...notes);
-//             const nbre = notes.length;
-//             const moyenne = +(notes.reduce((sum, n) => sum + n, 0) / notes.length).toFixed(2);
-//             return { branche, nbre, min, max, moyenne, notes };
-//         })
-//     })).sort((a, b) => a.eleve.localeCompare(b.eleve));
-
-//     afficherObjet(elevesBranchesStats);
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionH() {
-
-//     const elevesBranchesStatsComplet = Object.values(
-//         jsonData.evaluations
-//             .reduce((acc, evaluation) => {
-//                 const key = `${evaluation.prenom} ${evaluation.nom}`;
-//                 if (!acc[key]) acc[key] = { eleve: key, branches: {} };
-//                 if (!acc[key].branches[evaluation.branche]) acc[key].branches[evaluation.branche] = [];
-//                 acc[key].branches[evaluation.branche].push({ date: evaluation.date, note: evaluation.note });
-//                 return acc;
-//             }, {})
-//     ).map(eleveObj => ({
-//         eleve: eleveObj.eleve,
-//         branches: Object.entries(eleveObj.branches).map(([branche, notesList]) => {
-//             // Trie les couples {date, note} par date croissante (format JJ.MM.AAAA)
-//             notesList.sort((a, b) => {
-//                 const [da, ma, ya] = a.date.split('.').map(Number);
-//                 const [db, mb, yb] = b.date.split('.').map(Number);
-//                 return new Date(ya, ma - 1, da) - new Date(yb, mb - 1, db);
-//             });
-//             const notesSansDates = notesList.map(obj => obj.note);
-//             const min = Math.min(...notesSansDates);
-//             const max = Math.max(...notesSansDates);
-//             const nbre = notesSansDates.length;
-//             const moyenne = +(notesSansDates.reduce((sum, n) => sum + n, 0) / notesSansDates.length).toFixed(2);
-//             return { branche, min, max, nbre, moyenne, notes: notesList };
-//         })
-//     })).sort((a, b) => a.eleve.localeCompare(b.eleve));
-
-//     afficherObjet(elevesBranchesStatsComplet);
-// }
-
-// // ---------------------------------------------------------------------------
-
-// function actionA2() {
-
-
-//     const branchesEvaluees = Array.from(            // Retransformer en tableau
-//         new Set(jsonData.evaluations                // Supprimer les doublons de ce tableau
-//             .map(evaluation => evaluation.prenom.substring(0, 1).toUpperCase() + evaluation.prenom.substring(1).toLowerCase() + ' ' + evaluation.nom.toUpperCase())  // Ne retenir que le NOM+Prénom
-//         )
-//     ).sort();
-
-//     afficherObjet(branchesEvaluees);
-// }
-
-
-
-
-
-
-
-// ///////////////////////////////////////////
-// /////////////////////////////////////////////
-
-// // Peut-être utile pour entraîner "reduce"
-
-// const initial = [
-//     { ville: "Bulle", canton: "FR" },
-//     { ville: "Lessoc", canton: "FR" },
-//     { ville: "Lausanne", canton: "VD" },
-//     { ville: "Riaz", canton: "FR" },
-//     { ville: "Olten", canton: "BE" },
-//     { ville: "Montreux", canton: "VD" },
-//     { ville: "Zermatt", canton: "VS" },
-//     { ville: "Bern", canton: "BE" }
-// ];
-// const final = [];
-// const fff = initial.reduce((accumulateur, ville) => {
-//     (ville.canton in accumulateur) ? accumulateur[ville.canton].push(ville.ville) : accumulateur[ville.canton] = [ville.ville];
-//     return accumulateur;
-// }, {}); // notez la valeur initiale => objet vide
-// console.log(fff);
-

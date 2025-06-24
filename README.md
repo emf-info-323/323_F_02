@@ -18,22 +18,27 @@ Vous allez devoir filtrer, réduire et ne prendre que la partie nécessaire de c
 
 Les rapports à produire :
 
-- [A01 - La plus petite et la plus grande date](#a01---la-plus-petite-et-la-plus-grande-date)
-- [A02 - Le chiffre d'affaire quotidien moyen](#a02---le-chiffre-daffaire-quotidien-moyen)
-- [A03 - ???](#a03---)
-- [A04 - ???](#a04---)
-- [A05 - ???](#a05---)
-- [A06 - ???](#a06---)
-- [A07 - ???](#a07---)
-- [A08 - ???](#a08---)
-- [A09 - ???](#a09---)
-- [A10 - ???](#a10---)
-- [A11 - ???](#a11---)
-- [A12 - ???](#a12---)
+- [Utilisation de `reduce()` seul](#utilisation-de-reduce-seul)
+  - [Rapport A01 - La plus petite et la plus grande date](#rapport-a01---la-plus-petite-et-la-plus-grande-date)
+  - [Rapport A02 - Le chiffre d'affaire quotidien moyen](#rapport-a02---le-chiffre-daffaire-quotidien-moyen)
+  - [Rapport A03 - Liste des clients par id](#rapport-a03---liste-des-clients-par-id)
+  - [Rapport A04 - Liste des clients et leur CA](#rapport-a04---liste-des-clients-et-leur-ca)
+  - [Rapport A05 - CA et nbre de ventes par jour de la semaine](#rapport-a05---ca-et-nbre-de-ventes-par-jour-de-la-semaine)
+  - [Rapport A06 - CA par type de produit](#rapport-a06---ca-par-type-de-produit)
+  - [Rapport A07 - Types de produits et leur produits](#rapport-a07---types-de-produits-et-leur-produits)
+  - [Rapport A08 - Nbre de vente des produits par type](#rapport-a08---nbre-de-vente-des-produits-par-type)
+- [Utilisation de `map()` et `flat()`](#utilisation-de-map-et-flat)
+  - [Rapport A09 - toutes les ventes réalisées](#rapport-a09---toutes-les-ventes-réalisées)
+- [Utilisation de tous les opérateurs sauf les boucles](#utilisation-de-tous-les-opérateurs-sauf-les-boucles)
+  - [Rapport A10 - le TOP 6 des produits générant le plus de CA](#rapport-a10---le-top-6-des-produits-générant-le-plus-de-ca)
+  - [Rapport A11 - La liste des clients, triée par nom puis par prénom](#rapport-a11---la-liste-des-clients-triée-par-nom-puis-par-prénom)
+  - [Rapport A12 - Les dates et leur chiffre d'affaire, de la meilleure à la pire](#rapport-a12---les-dates-et-leur-chiffre-daffaire-de-la-meilleure-à-la-pire)
 
 ### Utilisation de `reduce()` seul
 
-#### A01 - La plus petite et la plus grande date
+N.B. ⚠️ Vous n'avez pas le droit d'utiliser les boucles comme `foreach()` ‼️
+
+#### Rapport A01 - La plus petite et la plus grande date
 
 ⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
 
@@ -46,7 +51,7 @@ Les rapports à produire :
 }
 ```
 
-#### A02 - Le chiffre d'affaire quotidien moyen
+#### Rapport A02 - Le chiffre d'affaire quotidien moyen
 
 ⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
 
@@ -59,7 +64,7 @@ Les rapports à produire :
 118.20344827586193
 ```
 
-#### A03 - Liste des clients par id
+#### Rapport A03 - Liste des clients par id
 
 ⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
 
@@ -122,7 +127,7 @@ Les rapports à produire :
 }
 ```
 
-#### A04 - Liste des clients et leur CA
+#### Rapport A04 - Liste des clients et leur CA
 
 ⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
 
@@ -214,7 +219,7 @@ Les rapports à produire :
 ]
 ```
 
-#### A05 - CA et nbre de ventes par jour de la semaine
+#### Rapport A05 - CA et nbre de ventes par jour de la semaine
 
 ⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela ‼️
 
@@ -248,7 +253,7 @@ Les rapports à produire :
 }
 ```
 
-#### A06 - CA par type de produit
+#### Rapport A06 - CA par type de produit
 
 ⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
 
@@ -271,7 +276,7 @@ Les rapports à produire :
 }
 ```
 
-#### A07 - Types de produits et leur produits
+#### Rapport A07 - Types de produits et leur produits
 
 ⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
 
@@ -347,7 +352,7 @@ Les rapports à produire :
 }
 ```
 
-#### A08 - Nbre de vente des produits par type
+#### Rapport A08 - Nbre de vente des produits par type
 
 ⚠️ Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
 
@@ -423,51 +428,197 @@ Les rapports à produire :
 }
 ```
 
-#### A09 -
+### Utilisation de `map()` et `flat()`
 
-⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
+#### Rapport A09 - toutes les ventes réalisées
 
-À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
-
-```json
-```
-
-#### A10 -
-
-⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
+⚠️ Votre code doit utiliser la méthode `map()` et/ou `flat()` pour faire son travail ‼️
 
 À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
 
 ```json
+[
+   {
+      "id": "ID9048EEAB-7AC25BB7",
+      "type": "Fruits",
+      "nom": "Poire",
+      "prix": 1
+   },
+   {
+      "id": "ID4DB55AE8-E00E9A5E",
+      "type": "Boisson énergisante",
+      "nom": "Monster Energy, cannette 300ml",
+      "prix": 3.5
+   },
+   {
+      "id": "IDD16AA41D-FDE7F70F",
+      "type": "Salades",
+      "nom": "Salade de pâtes",
+      "prix": 4
+   },
+
+...     // 3326 ventes
+...     // 3326 ventes
+...     // 3326 ventes
+
+   {
+      "id": "IDA10F5190-F81799C0",
+      "type": "Sandwich",
+      "nom": "Sandwich jambon/fromage",
+      "prix": 3.8
+   },
+   {
+      "id": "ID44438AF1-588AA0A0",
+      "type": "Boisson chaude",
+      "nom": "Thé",
+      "prix": 2
+   },
+   {
+      "id": "IDE72F6A73-CF2B809C",
+      "type": "Boisson froide",
+      "nom": "Coca-cola zéro 3dl",
+      "prix": 2.5
+   }
+]
 ```
 
-#### A11 -
+### Utilisation de tous les opérateurs sauf les boucles
 
-⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
+#### Rapport A10 - le TOP 6 des produits générant le plus de CA
+
+⚠️ Votre code peut tout utiliser sauf les boucles pour faire son travail ‼️
 
 À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
 
 ```json
+[
+   {
+      "id": "ID726EC1B7-91D5EEC3",
+      "nom": "Plat du jour chaud avec viande",
+      "ca": 913.5
+   },
+   {
+      "id": "ID91279676-773EF5BA",
+      "nom": "Plat du jour chaud avec pâtes ou riz",
+      "ca": 913.5
+   },
+   {
+      "id": "ID6216CE8C-C0255DD8",
+      "nom": "Plat du jour chaud végétarien",
+      "ca": 745.5
+   },
+   {
+      "id": "IDB0B4FAFD-429B64A5",
+      "nom": "Salade césar",
+      "ca": 356.99999999999943
+   },
+   {
+      "id": "IDA10F5190-F81799C0",
+      "nom": "Sandwich jambon/fromage",
+      "ca": 315.4000000000005
+   },
+   {
+      "id": "IDD16AA41D-FDE7F70F",
+      "nom": "Salade de pâtes",
+      "ca": 296
+   }
+]
 ```
 
-#### A12 -
+#### Rapport A11 - La liste des clients, triée par nom puis par prénom
 
-⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
+⚠️ Votre code peut tout utiliser sauf les boucles pour faire son travail ‼️
+
+⚠️ Le nom doit être transformé en majuscules et le prénom doit être transformé la première lettre en majuscules et suivantes en minuscules ‼️
 
 À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
 
 ```json
+[
+   {
+      "nom": "CÉLÈRE",
+      "prenom": "Jack"
+   },
+   {
+      "nom": "D'ŒUF",
+      "prenom": "John"
+   },
+   {
+      "nom": "FICE",
+      "prenom": "Eddy"
+   },
+   {
+      "nom": "FRIEDLI",
+      "prenom": "Paul"
+   },
+   {
+      "nom": "GALLEY",
+      "prenom": "Philippe"
+   },
+   {
+      "nom": "HARONI",
+      "prenom": "Mac"
+   },
+   {
+      "nom": "NISSENS",
+      "prenom": "Remy"
+   },
+   {
+      "nom": "RIQUE",
+      "prenom": "Théo"
+   },
+   {
+      "nom": "TARISTE",
+      "prenom": "Guy"
+   },
+   {
+      "nom": "TERNET",
+      "prenom": "Alain"
+   },
+   {
+      "nom": "TERRIEUR",
+      "prenom": "Alain"
+   },
+   {
+      "nom": "TERRIEUR",
+      "prenom": "Alex"
+   },
+   {
+      "nom": "VOYANTE",
+      "prenom": "Claire"
+   }
+]
 ```
 
-#### A13 -
+#### Rapport A12 - Le TOP 5 des meilleures dates et leur CA
 
-⚠️ ????? Votre code doit utiliser la méthode `reduce()` pour faire cela mais peut s'aider d'autres méthodes comme `flatMap` ‼️
+⚠️ Votre code peut tout utiliser sauf les boucles pour faire son travail ‼️
 
 À partir des données déjà chargées dans `jsonData`, vous devez obtenir les information suivantes :
 
 ```json
+[
+   {
+      "date": "2024-10-17",
+      "ca": 211.7
+   },
+   {
+      "date": "2024-10-10",
+      "ca": 204.80000000000004
+   },
+   {
+      "date": "2024-12-30",
+      "ca": 200.4
+   },
+   {
+      "date": "2024-09-19",
+      "ca": 196.8
+   },
+   {
+      "date": "2024-10-21",
+      "ca": 196.2
+   }
+]
 ```
-
----
 
 <img src="res/EMF_logo_RVB_Info_long.png" width="25%" style="margin-left:-20px;">
